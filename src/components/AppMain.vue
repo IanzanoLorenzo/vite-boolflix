@@ -21,6 +21,13 @@ export default {
         </ul>
     </div>
 </template>
-<style lang="">
+<style lang="scss" scoped>
+li{
+    list-style: none;
+    margin: 0;
+}
+ul{
+    padding: 0;
+}
     
 </style>

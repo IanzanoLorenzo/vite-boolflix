@@ -13,7 +13,10 @@ export default {
 </script>
 <template lang="">
     <div class="card">
-        {{ movie.title }}
+        Titolo: {{ movie.title }} <br>
+        Titolo originale: {{ movie.original_title }} <br>
+        Lingua originale: {{ movie.original_language }} <br>
+        Voto: {{ Math.round(movie.vote_average / 2) }} 
     </div>
 </template>
 <style lang="">

@@ -22,6 +22,16 @@ export default {
       store.currentApiURL = newApiUrl;
       console.log(store.moviesArray);
     },
+    nextPage(){
+      store.currentPage += 1
+      let myUrl = store.currentApiURL + `&page=${store.currentPage}`
+      this.axiosRequest(myUrl)
+    },
+    previousPage(){
+      store.currentPage -= 1
+      let myUrl = store.currentApiURL + `&page=${store.currentPage}`
+      this.axiosRequest(myUrl)
+    },
     axiosRequest(myUrl){
       axios.get(myUrl).then((resp) => {
         store.moviesArray = resp.data.results;
@@ -34,7 +44,7 @@ export default {
 </script>
 <template lang="">
   <div class="background">
-    <AppHeader @cerca="searchFilm()"/>
+    <AppHeader @cerca="searchFilm()" @avanti="nextPage()" @indietro="previousPage()"/>
     <AppMain />
   </div>
 </template>
