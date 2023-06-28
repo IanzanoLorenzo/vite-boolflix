@@ -25,10 +25,10 @@ export default {
             <li>Titolo: {{ movie.title }}</li>
             <li>Titolo originale: {{ movie.original_title }}</li>
             <li>
-                Lingua originale: {{ movie.original_language }}
+                Lingua originale:
             </li>
             <li>
-                <img class="flag" :src="`/src/assets/${movie.original_language.toUpperCase()}.svg`" alt="">
+                <img class="flag" :src="`/src/assets/${movie.original_language.toUpperCase()}.svg`" :alt="movie.original_language">
             </li>
             <li>
                 Voto: {{ Math.ceil(movie.vote_average / 2) }} 
@@ -45,7 +45,7 @@ export default {
     }
     .poster{
         height: 100%;
-        max-width: 100%;
+        width: 100%;
     }
     .card{
         height: 400px;

@@ -19,16 +19,16 @@ export default {
 <template lang="">
     <div class="card">
         <div class="card-img">
-            <img class="poster" :src="serie.poster_path === null ? '/public/Image_not_available.png' : 'https://image.tmdb.org/t/p/original' + serie.poster_path" alt="">
+            <img class="poster" :src="serie.poster_path === null ? '/Image_not_available.png' : 'https://image.tmdb.org/t/p/original' + serie.poster_path" alt="">
         </div>
         <ul class="overlay">
             <li>Titolo: {{ serie.name }}</li>
             <li>Titolo originale: {{ serie.original_name }}</li>
             <li>
-                Lingua originale: {{ serie.original_language }}
+                Lingua originale:
             </li>
             <li>
-                <img class="flag" :src="`/src/assets/${serie.original_language.toUpperCase()}.svg`" alt="">
+                <img class="flag" :src="`/src/assets/${serie.original_language.toUpperCase()}.svg`" :alt="serie.original_language.toUpperCase()">
             </li>
             <li>
                 Voto: {{ Math.ceil(serie.vote_average / 2) }} 

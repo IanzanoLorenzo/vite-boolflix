@@ -14,62 +14,83 @@ export default {
       store
     }
   },
+  mounted(){
+      this.search() 
+      axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=6d56afffca668a7f4e4eaa8db93c6b94&language=it').then((risp)=>{
+        store.generiArrayMovies = risp.data.genres
+      })
+      axios.get('https://api.themoviedb.org/3/genre/tv/list?api_key=6d56afffca668a7f4e4eaa8db93c6b94&language=it').then((risp)=>{
+        store.generiArrayTV = risp.data.genres
+      })
+  },
   methods: {
     search(){
-      store.caricaMovie = false;
-      store.caricaTV = false;
-      let newApiUrlMovie = store.baseApiURLHead + store.movie + store.apiKey + `&query=${store.findString}`;
-      let newApiUrlTV = store.baseApiURLHead + store.TV + store.apiKey + `&query=${store.findString}`
+      let newApiUrlMovie, newApiUrlTV;
+      if (store.findString === ''){
+        store.caricaMovie = false;
+        store.caricaTV = false;
+        newApiUrlMovie = store.baseApiURLHeadTrend + store.movie + '/week' + store.apiKey;
+        newApiUrlTV = store.baseApiURLHeadTrend + store.TV + '/week' + store.apiKey;
+      }
+      else{
+        store.caricaMovie = false;
+        store.caricaTV = false;
+        newApiUrlMovie = store.baseApiURLHeadSearch + store.movie + store.apiKey + `&query=${store.findString}`;
+        newApiUrlTV = store.baseApiURLHeadSearch + store.TV + store.apiKey;
+        newApiUrlTV += `&query=${store.findString}`
+      }
+      if(store.findGenreMovies !== ''){
+        newApiUrlMovie += `&with_genres=${store.findGenreMovies}`
+        }
+      if(store.findGenreTV !== ''){
+      newApiUrlTV += `&with_genres=${store.findGenreTV}`
+      }
       this.axiosRequestFilm(newApiUrlMovie);
-      store.currentApiURLMovie = newApiUrlMovie;
-      this.axiosRequestTV(newApiUrlTV);
-      store.currentApiURLTV = newApiUrlTV;
+        store.currentApiURLMovie = newApiUrlMovie;
+        this.axiosRequestTV(newApiUrlTV);
+        store.currentApiURLTV = newApiUrlTV;
     },
     axiosRequestFilm(myUrl){
       axios.get(myUrl).then((resp) => {
-        store.caricaMovie = false
-        console.log(store.caricaMovie)
+        store.caricaMovie = false;
         store.moviesArray = resp.data.results;
         store.moviesCurrentPage = resp.data.page;
         store.moviesTotalPage = resp.data.total_pages;
-        store.caricaMovie = true
-        console.log(store.caricaMovie)
+        store.caricaMovie = true;
       })
     },
     axiosRequestTV(myUrl){
       axios.get(myUrl).then((resp) => {
-        store.caricaTV = false
-        console.log(store.caricaTV)
+        store.caricaTV = false;
         store.TVArray = resp.data.results;
         store.TVCurrentPage = resp.data.page;
         store.TVTotalPage = resp.data.total_pages;
-        store.caricaTV = true
-        console.log(store.caricaTV)
+        store.caricaTV = true;
       })
     },
     nextPageFilm(){
-      store.caricaMovie = false
-      store.moviesCurrentPage += 1
-      let myUrl = store.currentApiURLMovie + `&page=${store.moviesCurrentPage}`
-      this.axiosRequestFilm(myUrl)
+      store.caricaMovie = false;
+      store.moviesCurrentPage += 1;
+      let myUrl = store.currentApiURLMovie + `&page=${store.moviesCurrentPage}`;
+      this.axiosRequestFilm(myUrl);
     },
     previousPageFilm(){
-      store.caricaMovie = false
-      store.moviesCurrentPage -= 1
-      let myUrl = store.currentApiURLMovie + `&page=${store.moviesCurrentPage}`
-      this.axiosRequestFilm(myUrl)
+      store.caricaMovie = false;
+      store.moviesCurrentPage -= 1;
+      let myUrl = store.currentApiURLMovie + `&page=${store.moviesCurrentPage}`;
+      this.axiosRequestFilm(myUrl);
     },
     nextPageTV(){
-      store.caricaTV = false
-      store.TVCurrentPage += 1
-      let myUrl = store.currentApiURLTV + `&page=${store.TVCurrentPage}`
-      this.axiosRequestTV(myUrl)
+      store.caricaTV = false;
+      store.TVCurrentPage += 1;
+      let myUrl = store.currentApiURLTV + `&page=${store.TVCurrentPage}`;
+      this.axiosRequestTV(myUrl);
     },
     previousPageTV(){
-      store.caricaTV = false
-      store.TVCurrentPage -= 1
-      let myUrl = store.currentApiURLTV + `&page=${store.TVCurrentPage}`
-      this.axiosRequestTV(myUrl)
+      store.caricaTV = false;
+      store.TVCurrentPage -= 1;
+      let myUrl = store.currentApiURLTV + `&page=${store.TVCurrentPage}`;
+      this.axiosRequestTV(myUrl);
     },
   },
 }
@@ -83,7 +104,7 @@ export default {
 <style lang="scss">
   @use './styles/generals.scss';
   .background{
-    background-color: gray;
+    background-color: rgb(36, 36, 36);
     min-height: 100vh;
     max-width: 100%;
   }
