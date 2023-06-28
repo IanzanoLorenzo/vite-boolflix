@@ -25,7 +25,7 @@ export default {
                     <button :class="store.moviesCurrentPage < store.moviesTotalPage ? 'btn-primary' : 'hide btn-secondary'" class="btn" @click="store.moviesCurrentPage < store.moviesTotalPage ? $emit('avantiFilm') : ''">Avanti</button>
                 </div>
             </li>
-            <li class="col-12 mt-3">
+            <li class="col-12 mt-4">
                 <ul class="row flex-row flex-nowrap">
                     <li class="col-2" v-for="(movie, index) in store.moviesArray" :key="index">
                         <AppCardFilm :movie="movie"/>
@@ -42,7 +42,7 @@ export default {
                     <button :class="store.TVCurrentPage < store.TVTotalPage ? 'btn-primary' : 'hide btn-secondary'" class="btn" @click="store.TVCurrentPage < store.TVTotalPage ? $emit('avantiTV') : ''">Avanti</button>
                 </div>
             </li>
-            <li class="col-12 mt-3">
+            <li class="col-12 mt-4">
                 <ul class="row flex-row flex-nowrap">
                     <li class="col-2" v-for="(serie, index) in store.TVArray" :key="index">
                         <AppCardTV :serie="serie"/>
@@ -60,9 +60,15 @@ li{
 ul{
     padding: 0;
 }
+span{
+    width: 190px;
+    display: inline-block;
+    text-align: center;
+}
 .row{
+    min-height: 450px;
     margin: 0;
-    overflow: auto;
+    overflow-x: auto;
     max-width: 100%;
     scroll-behavior: smooth;
     &::-webkit-scrollbar{

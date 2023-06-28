@@ -39,16 +39,10 @@ export default {
         newApiUrlTV = store.baseApiURLHeadSearch + store.TV + store.apiKey;
         newApiUrlTV += `&query=${store.findString}`
       }
-      if(store.findGenreMovies !== ''){
-        newApiUrlMovie += `&with_genres=${store.findGenreMovies}`
-        }
-      if(store.findGenreTV !== ''){
-      newApiUrlTV += `&with_genres=${store.findGenreTV}`
-      }
       this.axiosRequestFilm(newApiUrlMovie);
-        store.currentApiURLMovie = newApiUrlMovie;
-        this.axiosRequestTV(newApiUrlTV);
-        store.currentApiURLTV = newApiUrlTV;
+      store.currentApiURLMovie = newApiUrlMovie;
+      this.axiosRequestTV(newApiUrlTV);
+      store.currentApiURLTV = newApiUrlTV;
     },
     axiosRequestFilm(myUrl){
       axios.get(myUrl).then((resp) => {
@@ -91,7 +85,7 @@ export default {
       store.TVCurrentPage -= 1;
       let myUrl = store.currentApiURLTV + `&page=${store.TVCurrentPage}`;
       this.axiosRequestTV(myUrl);
-    },
+    }
   },
 }
 </script>
@@ -107,5 +101,6 @@ export default {
     background-color: rgb(36, 36, 36);
     min-height: 100vh;
     max-width: 100%;
+    padding-bottom: 50px;
   }
 </style>

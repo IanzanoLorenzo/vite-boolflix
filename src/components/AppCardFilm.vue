@@ -18,7 +18,7 @@ export default {
 </script>
 <template lang="">
     <div class="card">
-        <div class="frontcard">
+        <div class="card-img">
             <img class="poster" :src="movie.poster_path === null ? '/Image_not_available.png' : 'https://image.tmdb.org/t/p/original' + movie.poster_path" alt="">
         </div>
         <ul class="overlay">
@@ -39,45 +39,5 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
-    .flag{
-        width: 60px;
-        height: 40px;
-    }
-    .poster{
-        height: 100%;
-        width: 100%;
-    }
-    .card{
-        height: 400px;
-        background-color: gray;
-        position: relative;
-        &:hover .overlay{
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-    }
-
-    .frontcard{
-        height: 100%;
-        width: 100%;
-    }
-    .overlay{
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.808);
-        color: white;
-        display: none;
-        ul{
-            margin: 0;
-        }
-        li{
-            list-style: none;
-            margin: 10px 0;
-        }
-    }
-    i{
-        color: yellow;
-    }
+    @use '../styles/cardstyle' as *;
 </style>

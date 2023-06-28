@@ -39,46 +39,5 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
-    .flag{
-        width: 60px;
-        height: 40px;
-    }
-    .poster{
-        height: 100%;
-        max-width: 100%;
-    }
-    .card{
-        height: 400px;
-        background-color: gray;
-        position: relative;
-        &:hover .overlay{
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-    }
-
-    .card-img{
-        height: 100%;
-        width: 100%;
-    }
-    .overlay{
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.808);
-        color: white;
-        display: none;
-        padding: 10px;
-        ul{
-            margin: 0;
-        }
-        li{
-            list-style: none;
-            margin: 10px 0;
-        }
-    }
-    i{
-        color: yellow;
-    }
+    @use '../styles/cardstyle' as *;
 </style>
