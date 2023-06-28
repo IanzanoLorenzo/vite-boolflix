@@ -24,14 +24,17 @@ export default {
       })
   },
   methods: {
+    //FUNZIONE DI RICERCA
     search(){
       let newApiUrlMovie, newApiUrlTV;
+      //PER TREND SE NON VIENE INSERITO UN INPUT
       if (store.findString === ''){
         store.caricaMovie = false;
         store.caricaTV = false;
         newApiUrlMovie = store.baseApiURLHeadTrend + store.movie + '/week' + store.apiKey;
         newApiUrlTV = store.baseApiURLHeadTrend + store.TV + '/week' + store.apiKey;
       }
+      // PER NOME FILM SE VIENE INSERITO UN INPUT
       else{
         store.caricaMovie = false;
         store.caricaTV = false;
@@ -44,6 +47,7 @@ export default {
       this.axiosRequestTV(newApiUrlTV);
       store.currentApiURLTV = newApiUrlTV;
     },
+    //RICHIESTA AXIOS CHE POPOLA I FILM
     axiosRequestFilm(myUrl){
       axios.get(myUrl).then((resp) => {
         store.caricaMovie = false;
@@ -53,6 +57,7 @@ export default {
         store.caricaMovie = true;
       })
     },
+    //RICHIESTA AXIOS CHE POPOLA LE SERIE TV
     axiosRequestTV(myUrl){
       axios.get(myUrl).then((resp) => {
         store.caricaTV = false;
@@ -62,6 +67,7 @@ export default {
         store.caricaTV = true;
       })
     },
+    //PAGINAZIONE FILM
     nextPageFilm(){
       store.caricaMovie = false;
       store.moviesCurrentPage += 1;
@@ -74,6 +80,7 @@ export default {
       let myUrl = store.currentApiURLMovie + `&page=${store.moviesCurrentPage}`;
       this.axiosRequestFilm(myUrl);
     },
+    //PAGINAZIONE SERIE TV
     nextPageTV(){
       store.caricaTV = false;
       store.TVCurrentPage += 1;
